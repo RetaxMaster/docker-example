@@ -17,4 +17,6 @@ COPY [".", "/usr/src/"]
 EXPOSE 3000
 
 # Define cuál es el proceso por defecto que se ejecutará al correr esste contenedor (recordemos que con Docker, mientras el proceso principal está corriendo, la instancia de Docker estaré viva)
-CMD ["node", "index.js"]
+# Al usar nodemon, podemos bindear un archivo de nuestro proyecto en la máquina real a un archivo dentro de Docker, así cuando cambie en la máquina real, también cambiará dentro de Docker y nodemon lo detectará y correrá los cambios
+# docker run --rm -p 3000:3000 -v $(pwd)/index.js:/usr/src/index.js dockerapp
+CMD ["npx", "nodemon", "index.js"]
